@@ -1,6 +1,6 @@
 export default function Clients() {
   return (
-    <section className="w-full bg-white py-16 px-8 flex flex-col items-center">
+    <section className="w-full bg-white text-[#051C2C] py-16 px-8 flex flex-col items-center">
       <h3 className="text-2xl font-bold mb-10 text-center">
         Nuestros Clientes
       </h3>
