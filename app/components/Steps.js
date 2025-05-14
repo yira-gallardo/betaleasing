@@ -1,37 +1,35 @@
 export default function Steps() {
   return (
-    <section className="w-full flex flex-col md:flex-row items-center justify-between px-8 py-16 gap-8 bg-gradient-to-r from-[#e6e6e6] to-[#f7f7f7]">
-      {/* Texto y pasos */}
-      <div className="flex-1 flex flex-col gap-4 max-w-lg">
-        <h3 className="text-2xl font-bold mb-2">
-          Solicita tu <span className="text-[#FF6B2C]">arrendamiento</span>
+    <section className="w-full flex flex-col md:flex-row items-center justify-between px-8 py-16 gap-8 bg-[url('/img-2.jpg')] bg-cover bg-center bg-no-repeat">
+      {/* Overlay de texto */}
+      <div className="flex-1 flex flex-col gap-4 max-w-lg bg-[#051C2C]/95 rounded-lg p-10 shadow-lg">
+        <h3 className="text-3xl font-bold mb-4 text-white">
+          Solicita tu{" "}
+          <span className="text-[#FF914D] relative inline-block">
+            arrendamiento
+            <span className='block absolute left-0 -bottom-2 w-full h-3 bg-[url("/brochazo.png")] bg-no-repeat bg-left bg-contain'></span>
+          </span>
         </h3>
-        <ol className="list-decimal list-inside text-lg mb-4 text-[#0A1A23]">
-          <li className="mb-2">
-            <span className="font-bold text-[#FF6B2C]">01</span> Llena el
-            formulario online
+        <ol className="list-none text-xl mb-6 text-white">
+          <li className="mb-4 flex items-center">
+            <span className="font-bold text-[#FF914D] text-4xl mr-4">01</span>
+            <span>Llena el formulario online</span>
           </li>
-          <li className="mb-2">
-            <span className="font-bold text-[#FF6B2C]">02</span> Recibe una
-            cotización preliminar
+          <li className="mb-4 flex items-center">
+            <span className="font-bold text-[#FF914D] text-4xl mr-4">02</span>
+            <span>Recibe una cotización preliminar</span>
           </li>
-          <li>
-            <span className="font-bold text-[#FF6B2C]">03</span> Un asesor te
-            contactará
+          <li className="flex items-center">
+            <span className="font-bold text-[#FF914D] text-4xl mr-4">03</span>
+            <span>Un asesor te contactará</span>
           </li>
         </ol>
         <a
           href="#contacto"
-          className="inline-block bg-[#FF6B2C] hover:bg-[#ff8c5a] text-white px-6 py-3 rounded font-semibold text-base transition w-max"
+          className="inline-block bg-gradient-to-r from-[#EC3A35] to-[#F6A340] text-white px-8 py-3 rounded font-semibold text-base transition w-max shadow-md"
         >
           Llenar el formulario
         </a>
-      </div>
-      {/* Imagen persona (placeholder) */}
-      <div className="flex-1 flex justify-center md:justify-end mt-8 md:mt-0">
-        <div className="w-56 h-64 bg-white/40 rounded-lg flex items-center justify-center">
-          {/* Imagen real aquí */}
-        </div>
       </div>
     </section>
   );

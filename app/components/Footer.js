@@ -1,18 +1,20 @@
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#0A1A23] text-white flex flex-col md:flex-row items-center justify-between px-8 py-8 gap-8">
+    <footer className="w-full bg-white text-[#0A1A23] flex flex-col md:flex-row items-center justify-between px-8 py-8 gap-8 border-t border-gray-200">
       {/* Logo y nombre */}
       <div className="flex items-center gap-2 mb-4 md:mb-0">
-        <div className="w-28 h-7 bg-white rounded-sm flex items-center justify-center">
-          <span className="text-[#0A1A23] font-bold text-lg">LOGO</span>
-        </div>
+        <img
+          src="/logo-azul.png"
+          alt="BetaLeasing Logo"
+          className="h-48 w-auto"
+        />
       </div>
       {/* Oficinas */}
       <div className="text-xs text-center md:text-left">
         <div className="font-bold mb-1">Oficinas</div>
         Newton 186 Int. 401, Polanco,
         <br />
-        CDMX CP 11560
+        CDMX. CP 11560
         <br />
         México
       </div>
