@@ -7,7 +7,7 @@ export default function ContactForm() {
     apellido: "",
     email: "",
     celular: "",
-    arrendatario: "Persona Moral",
+    arrendatario: "",
     empresa: "",
     factura: "",
   });
@@ -20,9 +20,15 @@ export default function ContactForm() {
     if (!form.email) newErrors.email = "*Campo obligatorio";
     else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email))
       newErrors.email = "*Correo inválido";
-    if (!form.celular) newErrors.celular = "*Validación de celular";
-    else if (!/^\d{10}$/.test(form.celular))
-      newErrors.celular = "*Debe tener 10 dígitos";
+    if (!form.celular) newErrors.celular = "*Campo obligatorio";
+    else {
+      const phoneDigits = form.celular.replace(/\D/g, "");
+      if (phoneDigits.length !== 10) {
+        newErrors.celular = "*Debe tener 10 dígitos";
+      } else if (!/^[1-9][0-9]{9}$/.test(phoneDigits)) {
+        newErrors.celular = "*Número inválido";
+      }
+    }
     if (form.arrendatario === "Persona Moral" && !form.empresa)
       newErrors.empresa = "*Campo condicional a la variable Persona Moral";
     if (!form.factura) newErrors.factura = "*Campo $";
@@ -48,7 +54,6 @@ export default function ContactForm() {
       id="contacto"
       className="w-full bg-[#0A1A23] text-white flex flex-col md:flex-row items-start justify-start px-4 md:px-12 py-8 md:py-16 gap-4 md:gap-8"
     >
-      {/* Izquierda: Título y atención al cliente */}
       <div className="w-full flex flex-col md:flex-row gap-8 md:gap-16">
         <div className="flex flex-col w-full md:min-w-[320px] md:max-w-[400px] gap-6 md:gap-8">
           <div>
@@ -175,7 +180,29 @@ export default function ContactForm() {
                   errors.celular ? "border-red-400" : ""
                 }`}
                 value={form.celular}
-                onChange={handleChange}
+                onChange={(e) => {
+                  // Remove all non-digit characters
+                  const value = e.target.value.replace(/\D/g, "");
+                  // Format as Mexican phone number
+                  let formattedValue = value;
+                  if (value.length > 0) {
+                    // Always show area code in parentheses
+                    formattedValue = `(${value.slice(0, 2)}${
+                      value.length > 2 ? ") " : ""
+                    }`;
+                    // Add the rest of the number
+                    if (value.length > 2) {
+                      formattedValue += `${value.slice(2, 6)}${
+                        value.length > 6 ? "-" : ""
+                      }${value.slice(6, 10)}`;
+                    }
+                  }
+                  handleChange({
+                    target: { name: "celular", value: formattedValue },
+                  });
+                }}
+                placeholder="(55) 2342-3423"
+                maxLength="14"
                 required
               />
               {errors.celular && (
@@ -193,8 +220,11 @@ export default function ContactForm() {
                 value={form.arrendatario}
                 onChange={handleChange}
               >
+                <option value="" disabled>
+                  Selecciona una opción
+                </option>
                 <option>Persona Moral</option>
-                <option>Persona Física</option>
+                <option>PFAE</option>
               </select>
             </div>
             {form.arrendatario === "Persona Moral" ? (
@@ -231,7 +261,18 @@ export default function ContactForm() {
                   errors.factura ? "border-red-400" : ""
                 }`}
                 value={form.factura}
-                onChange={handleChange}
+                onChange={(e) => {
+                  // Remove all non-digit characters
+                  const value = e.target.value.replace(/[^\d]/g, "");
+                  // Format as currency
+                  const formattedValue = value
+                    ? `$${Number(value).toLocaleString("es-MX")}`
+                    : "";
+                  handleChange({
+                    target: { name: "factura", value: formattedValue },
+                  });
+                }}
+                placeholder="$0.00"
               />
               {errors.factura && (
                 <span className="text-xs text-red-500">{errors.factura}</span>
@@ -240,7 +281,7 @@ export default function ContactForm() {
             <div className="flex flex-col gap-1 md:col-span-2 mt-2">
               <button
                 type="submit"
-                className="bg-gradient-to-r from-[#EC3A35] to-[#F6A340] text-white px-6 md:px-8 py-3 rounded font-semibold text-sm md:text-base transition w-full md:w-max flex items-center justify-center md:justify-start gap-2 shadow-md"
+                className="bg-gradient-to-r from-[#EC3A35] to-[#F6A340] text-white px-6 md:px-8 py-3 rounded font-semibold text-sm md:text-base transition w-full md:w-max flex items-center justify-center md:justify-start gap-2 shadow-md hover:scale-105 hover:shadow-lg hover:shadow-orange-500/30 cursor-pointer"
               >
                 Contáctanos
                 <span className="inline-block">
@@ -259,8 +300,6 @@ export default function ContactForm() {
           </form>
         </div>
       </div>
-
-      {/* Formulario */}
     </section>
   );
 }

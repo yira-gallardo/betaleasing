@@ -20,8 +20,6 @@ export default function Navbar() {
           className="object-contain"
         />
       </div>
-
-      {/* Hamburger button for mobile */}
       <button
         className="md:hidden text-white"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -37,8 +35,6 @@ export default function Navbar() {
           <path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
         </svg>
       </button>
-
-      {/* Desktop menu */}
       <ul className="hidden md:flex gap-8 text-sm font-medium">
         <li>
           <a href="#" className="hover:text-orange-400 transition">
@@ -61,23 +57,12 @@ export default function Navbar() {
           </a>
         </li>
       </ul>
-
-      {/* Overlay para el menú móvil */}
-      {/* {isMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden transition-opacity duration-300"
-          onClick={() => setIsMenuOpen(false)}
-        />
-      )} */}
-
-      {/* Mobile menu drawer, z-50 y fondo oscuro */}
       <div
         className={`md:hidden fixed top-0 left-0 right-0 h-full w-full bg-[#0A1A23] text-white shadow-2xl z-50 flex flex-col p-0 overflow-y-auto transition-transform duration-300 ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
         style={{ minHeight: "100dvh" }}
       >
-        {/* Botón de cerrar (tache) */}
         <button
           className="absolute top-4 right-4 text-white hover:text-orange-400 transition text-3xl"
           onClick={() => setIsMenuOpen(false)}
@@ -93,7 +78,6 @@ export default function Navbar() {
             <path d="M2.146 2.146a.5.5 0 0 1 .708 0L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854a.5.5 0 0 1 0-.708z" />
           </svg>
         </button>
-        {/* Logo centrado */}
         <div className="flex justify-center items-center mt-4 mb-12">
           <Image
             src="/logo.png"
@@ -104,7 +88,6 @@ export default function Navbar() {
             priority
           />
         </div>
-        {/* Menú centrado */}
         <ul className="flex flex-col gap-10 text-2xl font-medium w-full items-center">
           <li>
             <a
@@ -143,7 +126,6 @@ export default function Navbar() {
             </a>
           </li>
         </ul>
-        {/* Botón CONTACTO centrado */}
         <a
           href="#"
           className="mt-12 mb-12 mx-auto w-3/4 max-w-xs bg-[#FF914D] text-white px-5 py-4 rounded-lg font-semibold text-2xl text-center uppercase tracking-wide transition hover:bg-orange-500"
@@ -151,7 +133,6 @@ export default function Navbar() {
         >
           CONTACTO
         </a>
-        {/* Redes sociales grandes y centradas */}
         <div className="flex gap-8 mt-auto mb-10 justify-center w-full text-3xl">
           <a href="#" className="text-white hover:text-orange-400 transition">
             <svg
@@ -188,11 +169,10 @@ export default function Navbar() {
           </a>
         </div>
       </div>
-
       <div className="hidden md:flex items-center gap-4">
         <a
           href="#"
-          className="bg-gradient-to-r from-[#EC3A35] to-[#F6A340] text-white px-5 py-2 rounded font-semibold text-sm transition"
+          className="bg-gradient-to-r from-[#EC3A35] to-[#F6A340] text-white px-5 py-2 rounded font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/30"
         >
           CONTACTO
         </a>

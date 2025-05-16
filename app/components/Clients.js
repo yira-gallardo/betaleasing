@@ -126,7 +126,7 @@ export default function Clients() {
         .testimonial-ribbon-absolute {
           position: absolute;
           left: -16px;
-          bottom: -60px;
+          bottom: -33px;
           height: 140px;
           z-index: 2;
           background: transparent;
@@ -263,7 +263,7 @@ export default function Clients() {
                   <img
                     src="/cintillo.png"
                     alt="5 estrellas"
-                    className="testimonial-ribbon-absolute select-none"
+                    className="testimonial-ribbon-absolute select-none -mt-20"
                   />
                   <div className="testimonial-logo-container">
                     <Image
