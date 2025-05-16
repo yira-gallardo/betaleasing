@@ -1,6 +1,6 @@
 export default function Steps() {
   return (
-    <section className="w-full flex flex-col md:flex-row items-center justify-between px-8 py-16 gap-8 bg-[url('/img-2.jpg')] bg-cover bg-center bg-no-repeat">
+    <section className="w-full flex flex-col md:flex-row items-center justify-between px-8 py-40 gap-8 bg-[url('/img-2.jpg')] bg-cover bg-center bg-no-repeat">
       {/* Overlay de texto */}
       <div className="flex-1 flex flex-col gap-4 max-w-lg bg-[#051C2C]/95 rounded-lg p-10 shadow-lg">
         <h3 className="text-3xl font-bold mb-4 text-white">
