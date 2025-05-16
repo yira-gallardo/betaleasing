@@ -1,7 +1,7 @@
 export default function Hero() {
   return (
     <section
-      className="relative w-full bg-[#0A1A23] text-white flex items-center justify-center px-8 pt-8 pb-12 min-h-[400px] overflow-hidden bg-cover bg-center"
+      className="relative w-full bg-[#0A1A23] text-white flex items-center justify-center px-8 pt-40 pb-40 min-h-[400px] overflow-hidden bg-cover bg-center"
       style={{ backgroundImage: "url(/bg.jpg)" }}
     >
       <div className="absolute inset-0 bg-black/40 z-0" />

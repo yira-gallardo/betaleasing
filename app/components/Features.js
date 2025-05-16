@@ -1,8 +1,11 @@
 export default function Features() {
   return (
-    <section className="w-full flex flex-col md:flex-row gap-6 px-8 py-12 bg-white relative z-10">
+    <section
+      id="features"
+      className="w-full flex flex-col md:flex-row gap-0  py-12 bg-white relative z-10"
+    >
       {/* Activos */}
-      <div className="flex-1 bg-[#051C2C] text-white rounded-lg p-8 flex flex-col gap-2 min-w-[220px]">
+      <div className="flex-1 bg-[#051C2C] text-white  p-12 flex flex-col gap-2 min-w-[220px]">
         <div className="mb-2 flex items-center gap-4">
           <img src="/icon.png" alt="icono activos" className="w-12 h-12" />
           <h3 className="font-bold text-2xl mb-0 flex items-center">Activos</h3>
@@ -17,7 +20,7 @@ export default function Features() {
         </ul>
       </div>
       {/* Servicios adicionales */}
-      <div className="flex-1 bg-[#FF914D] text-white rounded-lg p-8 flex flex-col gap-2 min-w-[220px]">
+      <div className="flex-1 bg-[#FF914D] text-white  p-12 flex flex-col gap-2 min-w-[220px]">
         <div className="mb-2 flex items-center gap-4">
           <img
             src="/icon-2.png"
@@ -37,7 +40,7 @@ export default function Features() {
         </ul>
       </div>
       {/* Soluciones inteligentes */}
-      <div className="flex-1 bg-white text-[#0A1A23] rounded-lg p-8 flex flex-col gap-2 min-w-[220px] border border-gray-200 shadow-sm">
+      <div className="flex-1 bg-white text-[#0A1A23]  p-12 flex flex-col gap-2 min-w-[220px] ">
         <h3 className="font-bold text-lg mb-0 text-black">
           Soluciones inteligentes
         </h3>

@@ -2,7 +2,10 @@ import Image from "next/image";
 
 export default function ServiceGoal() {
   return (
-    <section className="w-full bg-[#051C2C] text-white flex flex-col md:flex-row items-center justify-center px-8 py-16 gap-8">
+    <section
+      id="ServiceGoal"
+      className="w-full bg-[#051C2C] text-white flex flex-col md:flex-row items-center justify-center px-8 py-16 gap-8"
+    >
       {/* Columna izquierda: Imagen con decorativos */}
       <div className="flex-1 flex justify-end items-center pr-0 md:pr-8 relative min-w-[420px] max-w-[480px]">
         {/* Imagen principal */}
