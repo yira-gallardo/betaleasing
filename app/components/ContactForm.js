@@ -111,6 +111,46 @@ export default function ContactForm() {
             onSubmit={handleSubmit}
             className="w-full flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 bg-[#F5F6F8] rounded-lg p-4 md:p-8 text-[#0A1A23] shadow-lg md:ml-auto"
           >
+            <div className="flex flex-col gap-1">
+              <label htmlFor="arrendatario" className="font-medium text-sm">
+                Arrendatario
+              </label>
+              <select
+                id="arrendatario"
+                name="arrendatario"
+                className="border border-gray-200 rounded px-3 py-2 bg-white"
+                value={form.arrendatario}
+                onChange={handleChange}
+              >
+                <option value="" disabled>
+                  Selecciona una opción
+                </option>
+                <option>Persona Moral</option>
+                <option>PFAE</option>
+              </select>
+            </div>
+            {form.arrendatario === "Persona Moral" ? (
+              <div className="flex flex-col gap-1">
+                <label htmlFor="empresa" className="font-medium text-sm">
+                  Nombre empresa
+                </label>
+                <input
+                  id="empresa"
+                  name="empresa"
+                  type="text"
+                  className={`border border-gray-200 rounded px-3 py-2 bg-white ${
+                    errors.empresa ? "border-red-400" : ""
+                  }`}
+                  value={form.empresa}
+                  onChange={handleChange}
+                />
+                {errors.empresa && (
+                  <span className="text-xs text-red-500">{errors.empresa}</span>
+                )}
+              </div>
+            ) : (
+              <div></div>
+            )}
             <div className="flex flex-col gap-1 w-full">
               <label htmlFor="nombre" className="font-medium text-sm">
                 *Nombre
@@ -209,46 +249,6 @@ export default function ContactForm() {
                 <span className="text-xs text-red-500">{errors.celular}</span>
               )}
             </div>
-            <div className="flex flex-col gap-1">
-              <label htmlFor="arrendatario" className="font-medium text-sm">
-                Arrendatario
-              </label>
-              <select
-                id="arrendatario"
-                name="arrendatario"
-                className="border border-gray-200 rounded px-3 py-2 bg-white"
-                value={form.arrendatario}
-                onChange={handleChange}
-              >
-                <option value="" disabled>
-                  Selecciona una opción
-                </option>
-                <option>Persona Moral</option>
-                <option>PFAE</option>
-              </select>
-            </div>
-            {form.arrendatario === "Persona Moral" ? (
-              <div className="flex flex-col gap-1">
-                <label htmlFor="empresa" className="font-medium text-sm">
-                  Nombre empresa
-                </label>
-                <input
-                  id="empresa"
-                  name="empresa"
-                  type="text"
-                  className={`border border-gray-200 rounded px-3 py-2 bg-white ${
-                    errors.empresa ? "border-red-400" : ""
-                  }`}
-                  value={form.empresa}
-                  onChange={handleChange}
-                />
-                {errors.empresa && (
-                  <span className="text-xs text-red-500">{errors.empresa}</span>
-                )}
-              </div>
-            ) : (
-              <div></div>
-            )}
             <div className="flex flex-col gap-1 md:col-span-2">
               <label htmlFor="factura" className="font-medium text-sm">
                 Valor factura (IVA incluido)
@@ -283,7 +283,7 @@ export default function ContactForm() {
                 type="submit"
                 className="bg-gradient-to-r from-[#EC3A35] to-[#F6A340] text-white px-6 md:px-8 py-3 rounded font-semibold text-sm md:text-base transition w-full md:w-max flex items-center justify-center md:justify-start gap-2 shadow-md hover:scale-105 hover:shadow-lg hover:shadow-orange-500/30 cursor-pointer"
               >
-                Contáctanos
+                Cotiza
                 <span className="inline-block">
                   <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
                     <path

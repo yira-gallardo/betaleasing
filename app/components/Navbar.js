@@ -82,8 +82,8 @@ export default function Navbar() {
           <Image
             src="/logo.png"
             alt="Logo"
-            width={220}
-            height={56}
+            width={112}
+            height={28}
             className="object-contain"
             priority
           />

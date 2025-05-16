@@ -9,35 +9,39 @@ export default function Clients() {
   const testimonials = [
     {
       logo: "/logo-2.png",
-      text: "Beta Leasing se ha convertido en un socio estratégico para Galdisa, facilitándonos el crecimiento de nuestra flota de vehículos utilitarios y activos productivos sin descapitalizarnos. Además, su apoyo ha sido esencial para ofrecer vehículos como prestación a nuestros colaboradores, fortaleciendo nuestra competitividad y eficiencia operativa. Su profesionalismo y atención personalizada hacen que trabajar con ellos sea siempre una excelente experiencia.",
+      text: '"Beta Leasing se ha convertido en un socio estratégico para Galdisa, facilitándonos el crecimiento de nuestra flota de vehículos utilitarios y activos productivos sin descapitalizarnos. Además, su apoyo ha sido esencial para ofrecer vehículos como prestación a nuestros colaboradores, fortaleciendo nuestra competitividad y eficiencia operativa. Su profesionalismo y atención personalizada hacen que trabajar con ellos sea siempre una excelente experiencia."',
     },
     {
       logo: "/logo-3.png",
-      text: "Como PYME siempre buscas aliados eficientes que no tengan procesos complejos y nos den soluciones sobre necesidades especificas, las soluciones genéricas muchas veces no nos aplican",
+      text: '"Como PYME, siempre estamos en busca de aliados eficientes, que entiendan nuestras necesidades específicas y no nos compliquen con procesos largos o soluciones genéricas que no aplican a nuestra realidad. En Beta Leasing encontramos justo eso: un equipo que escucha, simplifica y propone alternativas hechas a la medida."',
     },
     {
       logo: "/logo-4.png",
-      text: "Beta Leasing quiero agradecer las atenciones que prestan para con la empresa, servicio muy profesional y altamente calificado, todo en tiempo con gran calidez, profesionalismo, atención personalizada, un servicio muy recomendable",
+      text: '"Agradecemos a Beta Leasing por las atenciones brindadas a nuestra empresa. Su servicio es altamente profesional, puntual y cálido, con una atención personalizada que realmente marca la diferencia. Sin duda, una empresa muy recomendable."',
     },
     {
       logo: "/logo-5.png",
-      text: "Hemos trabajado con BETA LEASING desde el año pasado y la experiencia ha sido muy buena. Siempre nos han brindado un servicio puntual, claro y profesional. Además, el trato ha sido cercano y de confianza, siempre pendientes de nuestras necesidades. Sin duda, los recomendamos como una opción confiable.",
+      text: '"Hemos trabajado con BETA LEASING desde el año pasado y la experiencia ha sido muy buena. Siempre nos han brindado un servicio puntual, claro y profesional. Además, el trato ha sido cercano y de confianza, siempre pendientes de nuestras necesidades. Sin duda, los recomendamos como una opción confiable."',
     },
     {
       logo: "/logo-6.png",
-      text: "COMVIVE es una desarrolladora de vivienda sostenible con presencia en el Valle de México, Morelos y Quintana Roo, reconocida internacionalmente por su compromiso ambiental y social. Desde 2024 hemos colaborado con Beta Leasing, teniendo una experiencia excepcional. Su servicio es profesional, ágil y comprometido con el cliente. Los recomendamos ampliamente como un socio confiable y destacado.",
+      text: '"Desde 2024 hemos colaborado con Beta Leasing, teniendo una experiencia excepcional. Su servicio es profesional, ágil y comprometido con el cliente. Los recomendamos ampliamente como un socio confiable y destacado"',
     },
     {
       logo: "/logo-7.png",
-      text: "Beta Leasing ha sido un gran apoyo en la obtención de equipo de transporte con una estrtegia adecuada a las necesidades de Affinitas Education México.",
+      text: '"Beta Leasing ha sido un gran apoyo en la obtención de equipo de transporte con una estrtegia adecuada a las necesidades de Affinitas Education México."',
     },
     {
       logo: "/logo-8.png",
-      text: "Ha sido hasta ahora un gran servicio. Todo el personal con el que hemos tratado ha sido además de amable, muy profesional. Sin duda lo recomendamos.",
+      text: '"Ha sido hasta ahora un gran servicio. Todo el personal con el que hemos tratado ha sido además de amable, muy profesional. Sin duda lo recomendamos."',
     },
     {
       logo: "/logo-9.png",
-      text: "En el rubro de la construcción cada proyecto tiene sus características particulares. Pero cuidar el flujo de caja para atender las necesidades de acuerdo al programa es básico. Es por esto que Beta Leasing se ha convertido en un aliado estratégico para nosotros, porque nos permite contar con el equipo necesario, permitiéndonos al mismo tiempo atender otras áreas clave de la obra.",
+      text: '"En el rubro de la construcción cada proyecto tiene sus características particulares. Pero cuidar el flujo de caja para atender las necesidades de acuerdo al programa es básico. Es por esto que Beta Leasing se ha convertido en un aliado estratégico para nosotros, porque nos permite contar con el equipo necesario, permitiéndonos al mismo tiempo atender otras áreas clave de la obra."',
+    },
+    {
+      logo: "/logo-10.png",
+      text: '"Beta leasing es mucho más que una arrendadora, es un asesor financiero que encuentra la manera de solucionar problemas manteniendo el riesgo controlado. Es uno de los socios estratégicos que nos acompañan siempre."',
     },
   ];
 
