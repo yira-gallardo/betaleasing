@@ -24,7 +24,7 @@ export default function Steps() {
           </li>
         </ol>
         <a
-          href="#contacto"
+          href="/cotizador"
           className="inline-block w-max bg-gradient-to-r from-[#EC3A35] to-[#F6A340] text-white px-5 py-2 rounded font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/30"
         >
           Llenar el formulario

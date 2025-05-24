@@ -283,7 +283,7 @@ export default function ContactForm() {
                 type="submit"
                 className="bg-gradient-to-r from-[#EC3A35] to-[#F6A340] text-white px-6 md:px-8 py-3 rounded font-semibold text-sm md:text-base transition w-full md:w-max flex items-center justify-center md:justify-start gap-2 shadow-md hover:scale-105 hover:shadow-lg hover:shadow-orange-500/30 cursor-pointer"
               >
-                Cotiza
+                Contáctanos
                 <span className="inline-block">
                   <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
                     <path

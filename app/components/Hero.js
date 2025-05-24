@@ -12,7 +12,7 @@ export default function Hero() {
           atención personalizada y tiempos de respuesta rápidos.
         </p>
         <a
-          href="#contacto"
+          href="/cotizador"
           className="text-lg bg-gradient-to-r from-[#EC3A35] to-[#F6A340] text-white px-5 py-2 rounded font-semibold  transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/30"
         >
           ¡Cotiza ahora!

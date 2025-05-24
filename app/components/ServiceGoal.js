@@ -76,7 +76,7 @@ export default function ServiceGoal() {
           </li>
         </ul>
         <a
-          href="#contacto"
+          href="/cotizador"
           className="bg-gradient-to-r from-[#EC3A35] to-[#F6A340] text-white px-5 py-2 rounded font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/30"
         >
           ¡Cotiza ahora!
