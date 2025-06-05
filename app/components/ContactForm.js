@@ -66,7 +66,8 @@ export default function ContactForm() {
               className="w-40 md:w-48 h-4 object-contain mt-[-8px] ml-1 select-none pointer-events-none"
             />
             <p className="text-sm md:text-base text-[#e0e0e0] mt-4">
-              Llena el siguiente formulario y nos pondremos en contacto
+              ¿Buscas opciones de arrendamiento puro? Déjanos tus datos y te
+              contactaremos pronto.
             </p>
           </div>
           <div className="bg-[#FF914D] rounded-lg p-4 md:p-6 flex flex-col gap-2 text-white shadow-md">
@@ -80,7 +81,9 @@ export default function ContactForm() {
                   />
                 </svg>
               </span>
-              55 8663 0720
+              <a href="tel:5586630720" className="hover:underline">
+                55 8663 0720
+              </a>
             </div>
             <div className="flex items-center gap-2 text-base">
               <span className="inline-block">
@@ -91,7 +94,14 @@ export default function ContactForm() {
                   />
                 </svg>
               </span>
-              56 6059 4172
+              <a
+                href="https://wa.me/525660594172"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                56 6059 4172
+              </a>
             </div>
             <div className="flex items-center gap-2 text-base">
               <span className="inline-block">
@@ -102,7 +112,12 @@ export default function ContactForm() {
                   />
                 </svg>
               </span>
-              contacto@betaleasing.com
+              <a
+                href="mailto:contacto@betaleasing.com"
+                className="hover:underline"
+              >
+                contacto@betaleasing.com
+              </a>
             </div>
           </div>
         </div>

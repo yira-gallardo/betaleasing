@@ -4,9 +4,9 @@ export default function ServiceGoal() {
   return (
     <section
       id="ServiceGoal"
-      className="overflow-x-hidden w-full bg-[#051C2C] text-white flex flex-col md:flex-row items-center justify-center px-8 py-16 gap-8"
+      className="overflow-x-hidden w-full bg-[#051C2C] text-white flex flex-col md:flex-row items-center justify-center px-8 py-0 md:py-16 gap-8"
     >
-      <div className="flex-1 flex justify-end items-center pr-0 md:pr-8 relative min-w-[420px] max-w-[480px]">
+      <div className="flex-1 justify-end items-center pr-0 md:pr-8 relative min-w-[420px] max-w-[480px] hidden md:flex">
         <div className="w-[420px] h-[500px] relative rounded-lg overflow-visible z-20 flex items-center justify-center">
           <Image
             src="/img-1.png"
@@ -17,14 +17,14 @@ export default function ServiceGoal() {
           />
         </div>
       </div>
-      <div className="flex-1 flex flex-col gap-6 max-w-2xl items-start justify-center">
+      <div className="flex-1 flex flex-col gap-6 max-w-2xl items-start justify-center p-6 md:p-0">
         <div className="mb-4">
           <h2 className="text-xl md:text-2xl font-bold leading-tight text-left">
-            Nuestra meta es brindar una experiencia de servicio
+            Nuestra meta es brindar una experiencia de
           </h2>
           <div className="relative w-max mb-2 mt-0">
             <span className="text-[#FF914D] font-bold text-2xl md:text-2xl relative z-10 block text-left">
-              inigualable
+              arrendamiento puro inigualable
             </span>
             <Image
               src="/brochazo.png"
@@ -81,6 +81,16 @@ export default function ServiceGoal() {
         >
           ¡Cotiza ahora!
         </a>
+      </div>
+      <div className="flex-1 justify-end items-center pr-0 md:pr-8 relative min-w-[420px] max-w-[480px] flex md:hidden">
+        <Image
+          src="/img-1.png"
+          alt="Servicio de leasing"
+          width={420}
+          height={500}
+          className="object-contain"
+          priority
+        />
       </div>
     </section>
   );

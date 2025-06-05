@@ -2,7 +2,7 @@ export default function Features() {
   return (
     <section
       id="features"
-      className="w-full flex flex-col md:flex-row gap-0  py-12 bg-white relative z-10"
+      className="w-full flex flex-col md:flex-row gap-0  py-0 md:py-12 bg-white relative z-10"
     >
       <div className="flex-1 bg-[#051C2C] text-white  p-12 flex flex-col gap-2 min-w-[220px]">
         <div className="mb-2 flex items-center gap-4">

@@ -7,9 +7,12 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/40 z-0" />
       <div className="relative flex flex-col items-center gap-4 z-10 text-center">
         <h1 className="text-5xl md:text-6xl font-bold mb-2">Simple y ágil</h1>
-        <p className="text-lg md:text-xl max-w-xl mb-6">
-          Beta Leasing brinda soluciones de arrendamiento en todo el país, con
-          atención personalizada y tiempos de respuesta rápidos.
+        <p className="text-base md:text-xl max-w-2xl mb-6">
+          Beta Leasing brinda{" "}
+          <span style={{ color: "#FF914D" }}>
+            soluciones de arrendamiento puro
+          </span>{" "}
+          en México, con atención personalizada y tiempo de respuesta rápidos.
         </p>
         <a
           href="/cotizador"
