@@ -157,62 +157,158 @@ export default function Cotizador() {
   // PDF generation handler
   const handleGeneratePDF = () => {
     const doc = new jsPDF();
-    let y = 10;
-    doc.setFontSize(18);
-    doc.text("Cotización Beta Leasing", 10, y);
+    let y = 15;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    // Logo
+    doc.addImage("/logo.png", "PNG", 10, 5, 40, 12);
+    // Title
+    doc.setFontSize(16);
+    doc.setFont("helvetica", "bold");
+    doc.text("Cotización de Arrendamiento Puro", pageWidth / 2, y, {
+      align: "center",
+    });
     y += 10;
-    doc.setFontSize(12);
-    doc.text("Datos del bien a cotizar:", 10, y);
-    y += 8;
-    doc.text(`Tipo: ${tipo}`, 10, y);
-    y += 7;
-    doc.text(`Marca: ${marca}`, 10, y);
-    y += 7;
-    doc.text(`Modelo: ${modelo}`, 10, y);
-    y += 7;
-    doc.text(`Año: ${ano}`, 10, y);
-    y += 7;
-    doc.text(`Valor total: ${valorTotal}`, 10, y);
-    y += 7;
-    doc.text(`IVA: ${iva}`, 10, y);
-    y += 7;
-    doc.text(`Valor factura (sin IVA): ${valorFactura}`, 10, y);
-    y += 7;
-    doc.text(`Plazo en meses: ${plazoMeses}`, 10, y);
-    y += 7;
-    doc.text(`Porcentaje de pago inicial: ${porcentajeEnganche}%`, 10, y);
-    y += 7;
-    doc.text(`Monto total a financiar: ${montoFinanciar}`, 10, y);
-    y += 7;
-    doc.text(`Renta mensual: ${rentaMensual}`, 10, y);
-    y += 12;
-    doc.text("Datos del solicitante:", 10, y);
-    y += 8;
-    doc.text(`Nombre completo: ${nombre}`, 10, y);
-    y += 7;
-    doc.text(`Teléfono: ${telefono}`, 10, y);
-    y += 7;
-    doc.text(`Compañía: ${compania}`, 10, y);
-    y += 7;
-    doc.text(`Correo electrónico: ${email}`, 10, y);
-    y += 12;
-    doc.setFontSize(10);
-    doc.text(
-      "* Los importes de seguros, impuestos, comisiones y costos de accesorios no están incluidos en esta cotización.",
-      10,
-      y
-    );
+    doc.setFontSize(13);
+    doc.setFont("helvetica", "normal");
+    doc.text("Bien: Vehículo", pageWidth / 2, y, { align: "center" });
+    // Reference and date
+    doc.setFontSize(9);
+    doc.text(`Clave de referencia: 1748360356-prueba`, 10, 30);
+    const today = new Date();
+    const fecha = today.toLocaleDateString("es-MX");
+    doc.text(`Fecha: ${fecha}`, pageWidth - 50, 30);
+    y = 36;
+    // Información del cliente
+    doc.setFontSize(11);
+    doc.setFont("helvetica", "bold");
+    doc.text("Información del cliente", pageWidth / 2, y, { align: "center" });
+    y += 4;
+    doc.setFont("helvetica", "normal");
+    doc.rect(10, y, pageWidth - 20, 14);
     y += 5;
-    doc.text(
-      "La presente cotización se emite únicamente con fines informativos y podrá ser objeto de modificaciones.",
-      10,
-      y
-    );
+    doc.text(`Empresa: ${compania || "-"}`, 14, y);
+    y += 4;
+    doc.text(`Contacto: ${nombre || "-"}`, 14, y);
+    doc.text(`Teléfono: ${telefono || "-"}`, 80, y);
+    y += 4;
+    doc.text(`Correo electrónico: ${email || "-"}`, 14, y);
+    y += 8;
+    // Información del vehículo
+    doc.setFont("helvetica", "bold");
+    doc.text("Información del vehículo", pageWidth / 2, y, { align: "center" });
+    y += 4;
+    doc.setFont("helvetica", "normal");
+    doc.rect(10, y, pageWidth - 20, 10);
+    y += 4;
+    doc.text(`Marca: ${marca || "-"}`, 14, y);
+    doc.text(`Modelo: ${modelo || "-"}`, 80, y);
+    y += 4;
+    doc.text(`Año: ${ano || "-"}`, 14, y);
+    doc.text(`Valor Factura: ${valorFactura}`, 80, y);
+    y += 8;
+    // Información del arrendamiento
+    doc.setFont("helvetica", "bold");
+    doc.text("Información del arrendamiento", pageWidth / 2, y, {
+      align: "center",
+    });
+    y += 4;
+    doc.setFont("helvetica", "normal");
+    doc.rect(10, y, pageWidth - 20, 38);
     y += 5;
+    // Calculations
+    const valorFacturaNum = parseFloat(removeFormatoDinero(valorFactura));
+    const pagoInicial = (porcentajeEnganche / 100) * valorFacturaNum;
+    const comision = valorFacturaNum * 0.03;
+    const subtotal = pagoInicial + comision;
+    const ivaComision = comision * IVA;
+    const ivaSubtotal = subtotal * IVA;
+    const rentaDeposito = valorFacturaNum * 0.025;
+    const totalPagoInicial = subtotal + ivaSubtotal + rentaDeposito;
+    const valorResidual = 0; // As in screenshot
+    // Renta mensual
+    const rentaMensualNum = parseFloat(removeFormatoDinero(rentaMensual));
+    // Table-like layout
+    doc.setFont("helvetica", "bold");
+    doc.text("Plazo", 14, y);
+    doc.text("24", 32, y);
+    doc.text("Renta mensual", 60, y);
+    doc.text(formatoDinero(rentaMensualNum), 100, y);
+    y += 6;
+    doc.setFont("helvetica", "normal");
+    doc.text("Pago inicial", 14, y);
+    doc.text(formatoDinero(pagoInicial), 60, y);
+    y += 5;
+    doc.text("Comisión 3%", 14, y);
+    doc.text(formatoDinero(comision), 60, y);
+    y += 5;
+    doc.text("Subtotal", 14, y);
+    doc.text(formatoDinero(subtotal), 60, y);
+    y += 5;
+    doc.text("IVA (16%)", 14, y);
+    doc.text(formatoDinero(ivaSubtotal), 60, y);
+    y += 5;
+    doc.text("Renta en depósito", 14, y);
+    doc.text(formatoDinero(rentaDeposito), 60, y);
+    y += 5;
+    doc.setFont("helvetica", "bold");
+    doc.text("Total pago inicial", 14, y);
+    doc.text(formatoDinero(totalPagoInicial), 60, y);
+    y += 5;
+    doc.setFont("helvetica", "normal");
+    doc.text("Valor residual (sin IVA)", 14, y);
+    doc.text(formatoDinero(valorResidual), 60, y);
+    y += 10;
+    // Beneficio Fiscal y Costo Real Estimado
+    doc.setFont("helvetica", "bold");
+    doc.text("Beneficio Fiscal y Costo Real Estimado", pageWidth / 2, y, {
+      align: "center",
+    });
+    y += 4;
+    doc.setFont("helvetica", "normal");
+    doc.rect(10, y, pageWidth - 20, 22);
+    y += 5;
+    // Fiscal calculations
+    const totalRentaPagoInicial = rentaMensualNum * 24 + totalPagoInicial;
+    const ahorroISR = totalRentaPagoInicial * 0.3 * -1;
+    const ahorroPTU = totalRentaPagoInicial * 0.1 * -1;
+    const ahorroIVA = totalRentaPagoInicial * 0.16 * -1;
+    const costoReal = totalRentaPagoInicial + ahorroISR + ahorroPTU + ahorroIVA;
+    doc.setFont("helvetica", "bold");
+    doc.text("Total renta + Pago inicial", 14, y);
+    doc.text(formatoDinero(totalRentaPagoInicial), 80, y);
+    y += 5;
+    doc.setFont("helvetica", "normal");
+    doc.text("Ahorro fiscal I.S.R. 30%", 14, y);
+    doc.setTextColor(255, 0, 0);
+    doc.text(formatoDinero(ahorroISR), 80, y);
+    doc.setTextColor(0, 0, 0);
+    y += 5;
+    doc.text("Ahorro fiscal P.T.U. 10%", 14, y);
+    doc.setTextColor(255, 0, 0);
+    doc.text(formatoDinero(ahorroPTU), 80, y);
+    doc.setTextColor(0, 0, 0);
+    y += 5;
+    doc.text("Ahorro fiscal I.V.A.", 14, y);
+    doc.setTextColor(255, 0, 0);
+    doc.text(formatoDinero(ahorroIVA), 80, y);
+    doc.setTextColor(0, 0, 0);
+    y += 5;
+    doc.setFont("helvetica", "bold");
+    doc.text("Valor residual", 14, y);
+    doc.text(formatoDinero(valorResidual), 80, y);
+    y += 5;
+    doc.setFont("helvetica", "bold");
+    doc.text("Costo real", 14, y);
+    doc.text(formatoDinero(costoReal), 80, y);
+    y += 10;
+    // Notas
+    doc.setFontSize(8);
+    doc.setFont("helvetica", "normal");
     doc.text(
-      "La celebración de cualquier contrato está sujeta a la aprobación de la solicitud de arrendamiento respectiva.",
+      "Notas: Los importes de seguros, impuestos, comisiones y costos de accesorios no están incluidos en esta cotización. La presente cotización se emite únicamente con fines informativos y podrá ser objeto de modificaciones. La celebración de cualquier contrato está sujeta a la aprobación de la solicitud de arrendamiento respectiva. El beneficio fiscal y costo real esta sujeto a la situación particular de cada cliente.",
       10,
-      y
+      y,
+      { maxWidth: pageWidth - 20 }
     );
     doc.save("cotizacion-beta-leasing.pdf");
   };
