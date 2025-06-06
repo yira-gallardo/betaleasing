@@ -6,9 +6,9 @@ export default function Steps() {
       <div className="flex-1 flex flex-col gap-4 max-w-lg bg-[#051C2C]/95 rounded-lg p-10 shadow-lg">
         {/* Mobile version */}
         <h3 className="text-3xl font-bold mb-4 text-white block sm:hidden">
-          Solicita tu{" "}
+          Solicita tu <span className="text-[#FF914D]">arrendamiento</span>{" "}
           <span className="relative inline-block">
-            <span className="text-[#FF914D] relative z-10">arrendamiento</span>
+            <span className="text-[#FF914D] relative z-10">puro</span>
             <Image
               src="/brochazo.png"
               alt="brochazo"
@@ -16,8 +16,7 @@ export default function Steps() {
               className="absolute left-0 bottom-0 w-full h-[0.6em] z-0 pointer-events-none select-none"
               style={{ objectFit: "contain", transform: "translateY(60%)" }}
             />
-          </span>{" "}
-          <span className="text-[#FF914D]">puro</span>
+          </span>
         </h3>
 
         {/* Desktop version */}

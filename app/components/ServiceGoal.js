@@ -23,7 +23,7 @@ export default function ServiceGoal() {
             Nuestra meta es brindar una experiencia de
           </h2>
           <div className="relative w-max mb-2 mt-0">
-            <span className="text-[#FF914D] font-bold text-2xl md:text-2xl relative z-10 block text-left">
+            <span className="text-[#FF914D] font-bold text-xl md:text-2xl relative z-10 block text-left">
               arrendamiento puro inigualable
             </span>
             <Image

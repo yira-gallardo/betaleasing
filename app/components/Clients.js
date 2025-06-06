@@ -179,26 +179,29 @@ export default function Clients() {
         @media (max-width: 768px) {
           .testimonial-card {
             flex-direction: column;
-            min-height: auto;
-            height: auto;
+            min-height: 400px;
+            height: 400px;
             padding: 1.5rem;
             margin: 0;
+            display: flex;
           }
           .testimonial-logo-container {
             min-width: auto;
             width: 100%;
-            height: 100px;
+            height: 80px;
             margin-bottom: 1rem;
             padding: 0.5rem;
           }
           .testimonial-content {
             padding: 0;
-            height: auto;
+            height: calc(100% - 100px);
+            display: flex;
+            flex-direction: column;
           }
           .testimonial-text {
-            height: auto;
+            height: calc(100% - 40px);
             margin-bottom: 1rem;
-            overflow-y: visible;
+            overflow-y: auto;
           }
           .testimonial-text p {
             font-size: 0.875rem;
