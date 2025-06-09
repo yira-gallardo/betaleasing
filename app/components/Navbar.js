@@ -47,7 +47,7 @@ export default function Navbar() {
           </a>
         </li>
         <li>
-          <a href="#" className="hover:text-orange-400 transition">
+          <a href="/cotizador" className="hover:text-orange-400 transition">
             COTIZAR
           </a>
         </li>
@@ -109,7 +109,7 @@ export default function Navbar() {
           </li>
           <li>
             <a
-              href="#"
+              href="#cotizador"
               className="hover:text-orange-400 transition block tracking-wide"
               onClick={handleMenuLinkClick}
             >
