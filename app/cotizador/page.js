@@ -160,7 +160,7 @@ export default function Cotizador() {
     let y = 15;
     const pageWidth = doc.internal.pageSize.getWidth();
     // Logo
-    doc.addImage("/logo-azul.png", "PNG", 10, 5, 40, 15);
+    doc.addImage("/logo-azul.png", "PNG", 10, 5, 40, 22.5);
     // Title
     doc.setFontSize(16);
     doc.setFont("helvetica", "bold");

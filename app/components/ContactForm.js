@@ -41,11 +41,41 @@ export default function ContactForm() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      // Aquí va la lógica de envío
-      alert("Formulario enviado correctamente");
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          alert("Formulario enviado correctamente");
+          // Limpiar el formulario
+          setForm({
+            nombre: "",
+            apellido: "",
+            email: "",
+            celular: "",
+            arrendatario: "",
+            empresa: "",
+            factura: "",
+          });
+        } else {
+          alert(
+            "Error al enviar el formulario. Por favor, intente nuevamente."
+          );
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Error al enviar el formulario. Por favor, intente nuevamente.");
+      }
     }
   };
 
