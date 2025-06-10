@@ -5,10 +5,27 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request) {
   try {
+    // Check if API key exists
+    if (!process.env.RESEND_API_KEY) {
+      console.error("RESEND_API_KEY environment variable is not set");
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Email service not configured",
+        },
+        { status: 500 }
+      );
+    }
+
     const data = await request.json();
+    console.log("Attempting to send email with data:", {
+      nombre: data.nombre,
+      email: data.email,
+      // Don't log sensitive data
+    });
 
     // Send email using Resend
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from: "BetaLeasing <contacto@betaleasing.com>", // For testing - change to "BetaLeasing <noreply@yourdomain.com>" when you verify your domain
       to: ["contacto@betaleasing.com", "allancastellanosmx@gmail.com"],
       subject: "Nuevo contacto desde el formulario web - BetaLeasing",
@@ -77,16 +94,28 @@ export async function POST(request) {
       `,
     });
 
+    console.log("Email sent successfully:", result);
+
     return NextResponse.json({
       success: true,
       message: "Correo enviado correctamente",
+      emailId: result.data?.id,
     });
   } catch (error) {
     console.error("Error al enviar el correo:", error);
+    console.error("Error details:", {
+      name: error.name,
+      message: error.message,
+      status: error.status,
+      response: error.response,
+    });
+
     return NextResponse.json(
       {
         success: false,
         message: "Error al enviar el correo",
+        error:
+          process.env.NODE_ENV === "development" ? error.message : undefined,
       },
       { status: 500 }
     );
