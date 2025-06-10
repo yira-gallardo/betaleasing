@@ -27,7 +27,7 @@ export async function POST(request) {
     // Send email using Resend
     const result = await resend.emails.send({
       from: "BetaLeasing <contacto@betaleasing.com>", // For testing - change to "BetaLeasing <noreply@yourdomain.com>" when you verify your domain
-      to: ["contacto@betaleasing.com", "allancastellanosmx@gmail.com"],
+      to: ["contacto@betaleasing.com"],
       subject: "Nuevo contacto desde el formulario web - BetaLeasing",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9fafb;">
