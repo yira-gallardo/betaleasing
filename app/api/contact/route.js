@@ -9,7 +9,7 @@ export async function POST(request) {
 
     // Send email using Resend
     await resend.emails.send({
-      from: "BetaLeasing <onboarding@resend.dev>", // For testing - change to "BetaLeasing <noreply@yourdomain.com>" when you verify your domain
+      from: "BetaLeasing <contacto@betaleasing.com>", // For testing - change to "BetaLeasing <noreply@yourdomain.com>" when you verify your domain
       to: ["contacto@betaleasing.com", "allancastellanosmx@gmail.com"],
       subject: "Nuevo contacto desde el formulario web - BetaLeasing",
       html: `
