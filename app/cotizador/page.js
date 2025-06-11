@@ -157,55 +157,63 @@ export default function Cotizador() {
   // PDF generation handler
   const handleGeneratePDF = () => {
     const doc = new jsPDF();
-    let y = 15;
+    let y = 20; // Set y to be below the logo
     const pageWidth = doc.internal.pageSize.getWidth();
     // Logo
     doc.addImage("/logo-azul.png", "PNG", 10, -6, 40, 38);
+    // Add a dividing line
+    doc.setDrawColor(200, 200, 200); // Light gray color
+    doc.line(10, y, pageWidth - 10, y);
+    y += 10;
     // Title
     doc.setFontSize(16);
     doc.setFont("helvetica", "bold");
     doc.text("Cotización de Arrendamiento Puro", pageWidth / 2, y, {
       align: "center",
     });
-    y += 10;
+    y += 8;
     doc.setFontSize(13);
-    doc.setFont("helvetica", "normal");
+    doc.setFont("helvetica", "bold");
     doc.text("Bien: Vehículo", pageWidth / 2, y, { align: "center" });
     // Reference and date
-    doc.setFontSize(9);
-    doc.text(`Clave de referencia: 1748360356-prueba`, 10, 30);
+    doc.setFontSize(8);
+    const reference = Math.floor(Math.random() * 100000000);
+    doc.text(`Clave de referencia: ${reference}`, 10, 44);
     const today = new Date();
     const fecha = today.toLocaleDateString("es-MX");
-    doc.text(`Fecha: ${fecha}`, pageWidth - 50, 30);
-    y = 36;
+    doc.text(`Fecha: ${fecha}`, pageWidth - 50, 44);
     // Información del cliente
+    y += 16;
     doc.setFontSize(11);
     doc.setFont("helvetica", "bold");
     doc.text("Información del cliente", pageWidth / 2, y, { align: "center" });
     y += 4;
     doc.setFont("helvetica", "normal");
-    doc.rect(10, y, pageWidth - 20, 14);
-    y += 5;
-    doc.text(`Empresa: ${compania || "-"}`, 14, y);
-    y += 4;
-    doc.text(`Contacto: ${nombre || "-"}`, 14, y);
-    doc.text(`Teléfono: ${telefono || "-"}`, 80, y);
-    y += 4;
-    doc.text(`Correo electrónico: ${email || "-"}`, 14, y);
+    doc.rect(10, y, pageWidth - 20, 30);
     y += 8;
+    doc.text(`Empresa: ${compania || "-"}`, 14, y);
+    y += 6;
+    doc.text(`Contacto: ${nombre || "-"}`, 14, y);
+    y += 6;
+    doc.text(`Teléfono: ${telefono || "-"}`, 14, y);
+    y += 6;
+    doc.text(`Correo electrónico: ${email || "-"}`, 14, y);
+    y += 12;
     // Información del vehículo
     doc.setFont("helvetica", "bold");
     doc.text("Información del vehículo", pageWidth / 2, y, { align: "center" });
     y += 4;
     doc.setFont("helvetica", "normal");
-    doc.rect(10, y, pageWidth - 20, 10);
-    y += 4;
-    doc.text(`Marca: ${marca || "-"}`, 14, y);
-    doc.text(`Modelo: ${modelo || "-"}`, 80, y);
-    y += 4;
-    doc.text(`Año: ${ano || "-"}`, 14, y);
-    doc.text(`Valor Factura: ${valorFactura}`, 80, y);
+    doc.rect(10, y, pageWidth - 20, 30);
     y += 8;
+    doc.text(`Marca: ${marca || "-"}`, 14, y);
+    y += 6;
+    doc.text(`Modelo: ${modelo || "-"}`, 14, y);
+    y += 6;
+    doc.text(`Año: ${ano || "-"}`, 14, y);
+    y += 6;
+    doc.text(`Valor Factura: ${valorFactura}`, 14, y);
+    y += 12;
     // Información del arrendamiento
     doc.setFont("helvetica", "bold");
     doc.text("Información del arrendamiento", pageWidth / 2, y, {
@@ -213,8 +221,8 @@ export default function Cotizador() {
     });
     y += 4;
     doc.setFont("helvetica", "normal");
-    doc.rect(10, y, pageWidth - 20, 38);
-    y += 5;
+    doc.rect(10, y, pageWidth - 20, 58);
+    y += 6;
     // Calculations
     const valorFacturaNum = parseFloat(removeFormatoDinero(valorFactura));
     const pagoInicial = (porcentajeEnganche / 100) * valorFacturaNum;
@@ -224,49 +232,58 @@ export default function Cotizador() {
     const ivaSubtotal = subtotal * IVA;
     const rentaDeposito = valorFacturaNum * 0.025;
     const totalPagoInicial = subtotal + ivaSubtotal + rentaDeposito;
-    const valorResidual = 0; // As in screenshot
+    const valorResidual = 0;
     // Renta mensual
     const rentaMensualNum = parseFloat(removeFormatoDinero(rentaMensual));
-    // Table-like layout
+    // Calculate the center of the box
+    const boxLeft = 10;
+    const boxWidth = pageWidth - 20;
+    const boxCenter = boxLeft + boxWidth / 2;
     doc.setFont("helvetica", "bold");
-    doc.text("Plazo", 14, y);
-    doc.text("24", 32, y);
-    doc.text("Renta mensual", 60, y);
-    doc.text(formatoDinero(rentaMensualNum), 100, y);
+    doc.text("Plazo", boxCenter - 2, y, { align: "right" });
+    doc.text(plazoMeses.toString(), boxCenter + 2, y, { align: "left" });
+    y += 6;
+    doc.text("Renta mensual", boxCenter - 2, y, { align: "right" });
+    doc.text(formatoDinero(rentaMensualNum), boxCenter + 2, y, {
+      align: "left",
+    });
     y += 6;
     doc.setFont("helvetica", "normal");
-    doc.text("Pago inicial", 14, y);
-    doc.text(formatoDinero(pagoInicial), 60, y);
-    y += 5;
-    doc.text("Comisión 3%", 14, y);
-    doc.text(formatoDinero(comision), 60, y);
-    y += 5;
-    doc.text("Subtotal", 14, y);
-    doc.text(formatoDinero(subtotal), 60, y);
-    y += 5;
-    doc.text("IVA (16%)", 14, y);
-    doc.text(formatoDinero(ivaSubtotal), 60, y);
-    y += 5;
-    doc.text("Renta en depósito", 14, y);
-    doc.text(formatoDinero(rentaDeposito), 60, y);
-    y += 5;
+    doc.text("Pago inicial", boxCenter - 2, y, { align: "right" });
+    doc.text(formatoDinero(pagoInicial), boxCenter + 2, y, { align: "left" });
+    y += 6;
+    doc.text("Comisión 3%", boxCenter - 2, y, { align: "right" });
+    doc.text(formatoDinero(comision), boxCenter + 2, y, { align: "left" });
+    y += 6;
+    doc.text("Subtotal", boxCenter - 2, y, { align: "right" });
+    doc.text(formatoDinero(subtotal), boxCenter + 2, y, { align: "left" });
+    y += 6;
+    doc.text("IVA (16%)", boxCenter - 2, y, { align: "right" });
+    doc.text(formatoDinero(ivaSubtotal), boxCenter + 2, y, { align: "left" });
+    y += 6;
+    doc.text("Renta en depósito", boxCenter - 2, y, { align: "right" });
+    doc.text(formatoDinero(rentaDeposito), boxCenter + 2, y, { align: "left" });
+    y += 6;
     doc.setFont("helvetica", "bold");
-    doc.text("Total pago inicial", 14, y);
-    doc.text(formatoDinero(totalPagoInicial), 60, y);
-    y += 5;
+    doc.text("Total pago inicial", boxCenter - 2, y, { align: "right" });
+    doc.text(formatoDinero(totalPagoInicial), boxCenter + 2, y, {
+      align: "left",
+    });
+    y += 6;
     doc.setFont("helvetica", "normal");
-    doc.text("Valor residual (sin IVA)", 14, y);
-    doc.text(formatoDinero(valorResidual), 60, y);
-    y += 10;
-    // Beneficio Fiscal y Costo Real Estimado
+    doc.text("Valor residual (sin IVA)", boxCenter - 2, y, { align: "right" });
+    doc.text(formatoDinero(valorResidual), boxCenter + 2, y, {
+      align: "left",
+    });
+    y += 12;
     doc.setFont("helvetica", "bold");
     doc.text("Beneficio Fiscal y Costo Real Estimado", pageWidth / 2, y, {
       align: "center",
     });
     y += 4;
     doc.setFont("helvetica", "normal");
-    doc.rect(10, y, pageWidth - 20, 22);
-    y += 5;
+    doc.rect(10, y, pageWidth - 20, 40);
+    y += 6;
     // Fiscal calculations
     const totalRentaPagoInicial = rentaMensualNum * 24 + totalPagoInicial;
     const ahorroISR = totalRentaPagoInicial * 0.3 * -1;
@@ -274,33 +291,57 @@ export default function Cotizador() {
     const ahorroIVA = totalRentaPagoInicial * 0.16 * -1;
     const costoReal = totalRentaPagoInicial + ahorroISR + ahorroPTU + ahorroIVA;
     doc.setFont("helvetica", "bold");
-    doc.text("Total renta + Pago inicial", 14, y);
-    doc.text(formatoDinero(totalRentaPagoInicial), 80, y);
-    y += 5;
+    doc.text("Total renta + Pago inicial", boxCenter - 2, y, {
+      align: "right",
+    });
+    doc.text(formatoDinero(totalRentaPagoInicial), boxCenter + 2, y, {
+      align: "left",
+    });
+    y += 6;
     doc.setFont("helvetica", "normal");
-    doc.text("Ahorro fiscal I.S.R. 30%", 14, y);
+    doc.text("Ahorro fiscal I.S.R. 30%", boxCenter - 2, y, {
+      align: "right",
+    });
     doc.setTextColor(255, 0, 0);
-    doc.text(formatoDinero(ahorroISR), 80, y);
+    doc.text(formatoDinero(ahorroISR), boxCenter + 2, y, {
+      align: "left",
+    });
     doc.setTextColor(0, 0, 0);
-    y += 5;
-    doc.text("Ahorro fiscal P.T.U. 10%", 14, y);
+    y += 6;
+    doc.text("Ahorro fiscal P.T.U. 10%", boxCenter - 2, y, {
+      align: "right",
+    });
     doc.setTextColor(255, 0, 0);
-    doc.text(formatoDinero(ahorroPTU), 80, y);
+    doc.text(formatoDinero(ahorroPTU), boxCenter + 2, y, {
+      align: "left",
+    });
     doc.setTextColor(0, 0, 0);
-    y += 5;
-    doc.text("Ahorro fiscal I.V.A.", 14, y);
+    y += 6;
+    doc.text("Ahorro fiscal I.V.A.", boxCenter - 2, y, {
+      align: "right",
+    });
     doc.setTextColor(255, 0, 0);
-    doc.text(formatoDinero(ahorroIVA), 80, y);
+    doc.text(formatoDinero(ahorroIVA), boxCenter + 2, y, {
+      align: "left",
+    });
     doc.setTextColor(0, 0, 0);
-    y += 5;
+    y += 6;
     doc.setFont("helvetica", "bold");
-    doc.text("Valor residual", 14, y);
-    doc.text(formatoDinero(valorResidual), 80, y);
-    y += 5;
+    doc.text("Valor residual", boxCenter - 2, y, {
+      align: "right",
+    });
+    doc.text(formatoDinero(valorResidual), boxCenter + 2, y, {
+      align: "left",
+    });
+    y += 6;
     doc.setFont("helvetica", "bold");
-    doc.text("Costo real", 14, y);
-    doc.text(formatoDinero(costoReal), 80, y);
-    y += 10;
+    doc.text("Costo real", boxCenter - 2, y, {
+      align: "right",
+    });
+    doc.text(formatoDinero(costoReal), boxCenter + 2, y, {
+      align: "left",
+    });
+    y += 12;
     // Notas
     doc.setFontSize(8);
     doc.setFont("helvetica", "normal");
@@ -310,7 +351,7 @@ export default function Cotizador() {
       y,
       { maxWidth: pageWidth - 20 }
     );
-    doc.save("cotizacion-beta-leasing.pdf");
+    doc.save(`cotizacion-beta-leasing-${reference}.pdf`);
   };
 
   return (
