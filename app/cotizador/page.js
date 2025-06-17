@@ -232,7 +232,8 @@ export default function Cotizador() {
     const ivaSubtotal = subtotal * IVA;
     const rentaDeposito = valorFacturaNum * 0.025;
     const totalPagoInicial = subtotal + ivaSubtotal + rentaDeposito;
-    const valorResidual = 0;
+    const valorResidual =
+      valorFacturaNum * getPorcentajeResidual(tipo, plazoMeses);
     // Renta mensual
     const rentaMensualNum = parseFloat(removeFormatoDinero(rentaMensual));
     // Calculate the center of the box
