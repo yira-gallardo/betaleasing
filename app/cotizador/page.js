@@ -225,17 +225,18 @@ export default function Cotizador() {
     y += 6;
     // Calculations
     const valorFacturaNum = parseFloat(removeFormatoDinero(valorFactura));
+    const valorTotalNum = valorFacturaNum * (1 + IVA);
+    // Renta mensual
+    const rentaMensualNum = parseFloat(removeFormatoDinero(rentaMensual));
     const pagoInicial = (porcentajeEnganche / 100) * valorFacturaNum;
-    const comision = valorFacturaNum * 0.03;
+    const comision = valorTotalNum * 0.03;
     const subtotal = pagoInicial + comision;
     const ivaComision = comision * IVA;
     const ivaSubtotal = subtotal * IVA;
-    const rentaDeposito = valorFacturaNum * 0.025;
+    const rentaDeposito = rentaMensualNum / (1 + IVA);
     const totalPagoInicial = subtotal + ivaSubtotal + rentaDeposito;
     const valorResidual =
       valorFacturaNum * getPorcentajeResidual(tipo, plazoMeses);
-    // Renta mensual
-    const rentaMensualNum = parseFloat(removeFormatoDinero(rentaMensual));
     // Calculate the center of the box
     const boxLeft = 10;
     const boxWidth = pageWidth - 20;
