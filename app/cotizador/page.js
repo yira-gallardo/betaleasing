@@ -13,24 +13,12 @@ const DIGITOS_DECIMALES = 2;
 
 // Utility functions
 const formatoDinero = (num) => {
-  const signo = num < 0 ? "-" : "";
-  const numConDecimales =
-    parseInt(Math.abs(+num || 0).toFixed(DIGITOS_DECIMALES)) + "";
-  const posicionComa =
-    numConDecimales.length > 3 ? numConDecimales.length % 3 : 0;
-
-  return (
-    "$" +
-    signo +
-    (posicionComa ? numConDecimales.substr(0, posicionComa) + "," : "") +
-    numConDecimales.substr(posicionComa).replace(/(\d{3})(?=\d)/g, "$1" + ",") +
-    (DIGITOS_DECIMALES
-      ? "." +
-        Math.abs(num - numConDecimales)
-          .toFixed(DIGITOS_DECIMALES)
-          .slice(2)
-      : "")
-  );
+  return num.toLocaleString("es-MX", {
+    style: "currency",
+    currency: "MXN",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 };
 
 const removeFormatoDinero = (num) => {
@@ -223,21 +211,35 @@ export default function Cotizador() {
     doc.setFont("helvetica", "normal");
     doc.rect(10, y, pageWidth - 20, 58);
     y += 6;
-    // Calculations
+    // Cálculos ajustados a la fórmula de la imagen
     const valorFacturaNum = parseFloat(removeFormatoDinero(valorFactura));
     const valorTotalNum = valorFacturaNum * (1 + IVA);
-    // Renta mensual
     const rentaMensualNum = parseFloat(removeFormatoDinero(rentaMensual));
     const pagoInicial = (porcentajeEnganche / 100) * valorFacturaNum;
     const comision = valorTotalNum * 0.03;
-    const subtotal = pagoInicial + comision;
-    const ivaComision = comision * IVA;
-    const ivaSubtotal = subtotal * IVA;
+    const subtotalPagoInicial = pagoInicial + comision;
+    const ivaSubtotal = subtotalPagoInicial * IVA;
     const rentaDeposito = rentaMensualNum / (1 + IVA);
-    const totalPagoInicial = subtotal + ivaSubtotal + rentaDeposito;
+    const totalPagoInicial = subtotalPagoInicial + ivaSubtotal + rentaDeposito;
     const valorResidual =
       valorFacturaNum * getPorcentajeResidual(tipo, plazoMeses);
-    // Calculate the center of the box
+    // Calcular la renta mensual sin IVA
+    const rentaMensualSinIVA = rentaMensualNum / (1 + IVA);
+    // Total renta (sin IVA) durante el plazo
+    const totalRenta = rentaMensualSinIVA * plazoMeses;
+    // Total renta + Pago inicial
+    const totalRentaPagoInicial = totalRenta + totalPagoInicial;
+    // Ahorro Fiscal ISR 35%
+    const ahorroISR = totalRentaPagoInicial * -1 * 0.35;
+    // Ahorro Fiscal PTU 10%
+    const ahorroPTU = totalRentaPagoInicial * -1 * 0.1;
+    // Ahorro Fiscal IVA
+    const pagoMensualConIVA = rentaMensualNum;
+    const ahorroIVA =
+      -1 * (ivaSubtotal + plazoMeses * pagoMensualConIVA - rentaDeposito);
+    // Costo real
+    const costoReal = totalRentaPagoInicial + ahorroISR + ahorroPTU + ahorroIVA;
+    // Calcular el centro de la caja
     const boxLeft = 10;
     const boxWidth = pageWidth - 20;
     const boxCenter = boxLeft + boxWidth / 2;
@@ -258,7 +260,9 @@ export default function Cotizador() {
     doc.text(formatoDinero(comision), boxCenter + 2, y, { align: "left" });
     y += 6;
     doc.text("Subtotal", boxCenter - 2, y, { align: "right" });
-    doc.text(formatoDinero(subtotal), boxCenter + 2, y, { align: "left" });
+    doc.text(formatoDinero(subtotalPagoInicial), boxCenter + 2, y, {
+      align: "left",
+    });
     y += 6;
     doc.text("IVA (16%)", boxCenter - 2, y, { align: "right" });
     doc.text(formatoDinero(ivaSubtotal), boxCenter + 2, y, { align: "left" });
@@ -274,9 +278,7 @@ export default function Cotizador() {
     y += 6;
     doc.setFont("helvetica", "normal");
     doc.text("Valor residual (sin IVA)", boxCenter - 2, y, { align: "right" });
-    doc.text(formatoDinero(valorResidual), boxCenter + 2, y, {
-      align: "left",
-    });
+    doc.text(formatoDinero(valorResidual), boxCenter + 2, y, { align: "left" });
     y += 12;
     doc.setFont("helvetica", "bold");
     doc.text("Beneficio Fiscal y Costo Real Estimado", pageWidth / 2, y, {
@@ -286,12 +288,7 @@ export default function Cotizador() {
     doc.setFont("helvetica", "normal");
     doc.rect(10, y, pageWidth - 20, 40);
     y += 6;
-    // Fiscal calculations
-    const totalRentaPagoInicial = rentaMensualNum * 24 + totalPagoInicial;
-    const ahorroISR = totalRentaPagoInicial * 0.3 * -1;
-    const ahorroPTU = totalRentaPagoInicial * 0.1 * -1;
-    const ahorroIVA = totalRentaPagoInicial * 0.16 * -1;
-    const costoReal = totalRentaPagoInicial + ahorroISR + ahorroPTU + ahorroIVA;
+    // Fiscal calculations (ajustados)
     doc.setFont("helvetica", "bold");
     doc.text("Total renta + Pago inicial", boxCenter - 2, y, {
       align: "right",
@@ -301,48 +298,28 @@ export default function Cotizador() {
     });
     y += 6;
     doc.setFont("helvetica", "normal");
-    doc.text("Ahorro fiscal I.S.R. 30%", boxCenter - 2, y, {
-      align: "right",
-    });
+    doc.text("Ahorro fiscal I.S.R. 35%", boxCenter - 2, y, { align: "right" });
     doc.setTextColor(255, 0, 0);
-    doc.text(formatoDinero(ahorroISR), boxCenter + 2, y, {
-      align: "left",
-    });
+    doc.text(formatoDinero(ahorroISR), boxCenter + 2, y, { align: "left" });
     doc.setTextColor(0, 0, 0);
     y += 6;
-    doc.text("Ahorro fiscal P.T.U. 10%", boxCenter - 2, y, {
-      align: "right",
-    });
+    doc.text("Ahorro fiscal P.T.U. 10%", boxCenter - 2, y, { align: "right" });
     doc.setTextColor(255, 0, 0);
-    doc.text(formatoDinero(ahorroPTU), boxCenter + 2, y, {
-      align: "left",
-    });
+    doc.text(formatoDinero(ahorroPTU), boxCenter + 2, y, { align: "left" });
     doc.setTextColor(0, 0, 0);
     y += 6;
-    doc.text("Ahorro fiscal I.V.A.", boxCenter - 2, y, {
-      align: "right",
-    });
+    doc.text("Ahorro fiscal I.V.A.", boxCenter - 2, y, { align: "right" });
     doc.setTextColor(255, 0, 0);
-    doc.text(formatoDinero(ahorroIVA), boxCenter + 2, y, {
-      align: "left",
-    });
+    doc.text(formatoDinero(ahorroIVA), boxCenter + 2, y, { align: "left" });
     doc.setTextColor(0, 0, 0);
     y += 6;
     doc.setFont("helvetica", "bold");
-    doc.text("Valor residual", boxCenter - 2, y, {
-      align: "right",
-    });
-    doc.text(formatoDinero(valorResidual), boxCenter + 2, y, {
-      align: "left",
-    });
+    doc.text("Valor residual", boxCenter - 2, y, { align: "right" });
+    doc.text(formatoDinero(valorResidual), boxCenter + 2, y, { align: "left" });
     y += 6;
     doc.setFont("helvetica", "bold");
-    doc.text("Costo real", boxCenter - 2, y, {
-      align: "right",
-    });
-    doc.text(formatoDinero(costoReal), boxCenter + 2, y, {
-      align: "left",
-    });
+    doc.text("Costo real", boxCenter - 2, y, { align: "right" });
+    doc.text(formatoDinero(costoReal), boxCenter + 2, y, { align: "left" });
     y += 12;
     // Notas
     doc.setFontSize(8);
