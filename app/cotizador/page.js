@@ -16,8 +16,8 @@ const formatoDinero = (num) => {
   return num.toLocaleString("es-MX", {
     style: "currency",
     currency: "MXN",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   });
 };
 
@@ -212,33 +212,54 @@ export default function Cotizador() {
     doc.rect(10, y, pageWidth - 20, 58);
     y += 6;
     // Cálculos ajustados a la fórmula de la imagen
-    const valorFacturaNum = parseFloat(removeFormatoDinero(valorFactura));
-    const valorTotalNum = valorFacturaNum * (1 + IVA);
-    const rentaMensualNum = parseFloat(removeFormatoDinero(rentaMensual));
-    const pagoInicial = (porcentajeEnganche / 100) * valorFacturaNum;
-    const comision = valorTotalNum * 0.03;
-    const subtotalPagoInicial = pagoInicial + comision;
-    const ivaSubtotal = subtotalPagoInicial * IVA;
-    const rentaDeposito = rentaMensualNum / (1 + IVA);
-    const totalPagoInicial = subtotalPagoInicial + ivaSubtotal + rentaDeposito;
-    const valorResidual =
-      valorFacturaNum * getPorcentajeResidual(tipo, plazoMeses);
+    const valorFacturaNum = Math.round(
+      parseFloat(removeFormatoDinero(valorFactura))
+    );
+    const valorTotalNum = Math.round(valorFacturaNum * (1 + IVA));
+    const rentaMensualNum = Math.round(
+      parseFloat(removeFormatoDinero(rentaMensual))
+    );
+    const pagoInicial = Math.round(
+      (porcentajeEnganche / 100) * valorFacturaNum
+    );
+    const comision = Math.round(valorTotalNum * 0.03);
+    const subtotalPagoInicial = Math.round(pagoInicial + comision);
+    const ivaSubtotal = Math.round(subtotalPagoInicial * IVA);
+    const rentaDeposito = Math.round(rentaMensualNum / (1 + IVA));
+    const totalPagoInicial = Math.round(
+      subtotalPagoInicial + ivaSubtotal + rentaDeposito
+    );
+    const valorResidual = Math.round(
+      valorFacturaNum * getPorcentajeResidual(tipo, plazoMeses)
+    );
     // Calcular la renta mensual sin IVA
-    const rentaMensualSinIVA = rentaMensualNum / (1 + IVA);
+    const rentaMensualSinIVA = Math.round(rentaMensualNum / (1 + IVA));
     // Total renta (sin IVA) durante el plazo
-    const totalRenta = rentaMensualSinIVA * plazoMeses;
+    const totalRenta = Math.round(rentaMensualSinIVA * plazoMeses);
     // Total renta + Pago inicial
-    const totalRentaPagoInicial = totalRenta + totalPagoInicial;
+    alert("rentaDeposito: " + rentaDeposito);
+    alert("plazoMeses: " + plazoMeses);
+    alert("subtotalPagoInicial: " + subtotalPagoInicial);
+    const totalRentaPagoInicial = Math.round(
+      rentaDeposito * plazoMeses + subtotalPagoInicial
+    );
     // Ahorro Fiscal ISR 35%
-    const ahorroISR = totalRentaPagoInicial * -1 * 0.35;
+    const ahorroISR = Math.round(totalRentaPagoInicial * -1 * 0.35);
     // Ahorro Fiscal PTU 10%
-    const ahorroPTU = totalRentaPagoInicial * -1 * 0.1;
+    const ahorroPTU = Math.round(totalRentaPagoInicial * -1 * 0.1);
     // Ahorro Fiscal IVA
-    const pagoMensualConIVA = rentaMensualNum;
-    const ahorroIVA =
-      -1 * (ivaSubtotal + plazoMeses * pagoMensualConIVA - rentaDeposito);
+    const pagoMensualConIVA = Math.round(rentaMensualNum);
+    // const ahorroIVA =
+    //  -1 * (ivaSubtotal + plazoMeses * pagoMensualConIVA - rentaDeposito);
+    const ahorroIVA = Math.round(
+      -1 * (ivaSubtotal + plazoMeses * (pagoMensualConIVA - rentaDeposito))
+    );
     // Costo real
-    const costoReal = totalRentaPagoInicial + ahorroISR + ahorroPTU + ahorroIVA;
+    //const costoReal = totalRentaPagoInicial + ahorroISR + ahorroPTU + ahorroIVA;
+    const costoReal = Math.round(
+      totalRentaPagoInicial + ahorroISR + ahorroPTU + ahorroIVA + valorResidual
+    );
+
     // Calcular el centro de la caja
     const boxLeft = 10;
     const boxWidth = pageWidth - 20;
