@@ -237,9 +237,7 @@ export default function Cotizador() {
     // Total renta (sin IVA) durante el plazo
     const totalRenta = Math.round(rentaMensualSinIVA * plazoMeses);
     // Total renta + Pago inicial
-    alert("rentaDeposito: " + rentaDeposito);
-    alert("plazoMeses: " + plazoMeses);
-    alert("subtotalPagoInicial: " + subtotalPagoInicial);
+
     const totalRentaPagoInicial = Math.round(
       rentaDeposito * plazoMeses + subtotalPagoInicial
     );
