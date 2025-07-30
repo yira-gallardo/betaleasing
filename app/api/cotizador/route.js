@@ -70,7 +70,7 @@ const generatePDF = (data) => {
   const pageWidth = doc.internal.pageSize.getWidth();
 
   // Logo
-  doc.addImage("/logo-azul.png", "PNG", 10, -6, 40, 38);
+  // doc.addImage("https://betaleasing.vercel.app//logo-azul.png", "PNG", 10, -6, 40, 38);
 
   // Add a dividing line
   doc.setDrawColor(200, 200, 200);
@@ -303,7 +303,7 @@ export async function POST(request) {
     // Send email using Resend with PDF attachment
     const result = await resend.emails.send({
       from: "BetaLeasing <contacto@betaleasing.com>",
-      to: ["allancastellanosmx@gmail.com"],
+      to: ["contacto@betaleasing.com"],
       subject: `Nueva cotización de arrendamiento - ${
         data.nombre || "Cliente"
       }`,
