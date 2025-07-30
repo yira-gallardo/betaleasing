@@ -367,6 +367,7 @@ export default function Cotizador() {
         modelo,
         ano,
         valorTotal,
+        valorFactura,
         plazoMeses,
         porcentajeEnganche,
         rentaMensual,
