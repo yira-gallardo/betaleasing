@@ -89,6 +89,7 @@ export default function Cotizador() {
   const [telefono, setTelefono] = useState("");
   const [compania, setCompania] = useState("");
   const [email, setEmail] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
 
   // Calculate values whenever dependencies change
   useEffect(() => {
@@ -143,7 +144,8 @@ export default function Cotizador() {
   };
 
   // PDF generation handler
-  const handleGeneratePDF = () => {
+  const handleGeneratePDF = async () => {
+    setIsGenerating(true);
     const doc = new jsPDF();
     let y = 20; // Set y to be below the logo
     const pageWidth = doc.internal.pageSize.getWidth();
@@ -349,7 +351,50 @@ export default function Cotizador() {
       y,
       { maxWidth: pageWidth - 20 }
     );
+
+    // Save PDF
     doc.save(`cotizacion-beta-leasing-${reference}.pdf`);
+
+    // Send email with cotization details
+    try {
+      const emailData = {
+        nombre,
+        email,
+        telefono,
+        compania,
+        tipo,
+        marca,
+        modelo,
+        ano,
+        valorTotal,
+        plazoMeses,
+        porcentajeEnganche,
+        rentaMensual,
+        reference,
+        fecha,
+      };
+
+      const response = await fetch("/api/cotizador", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(emailData),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert("PDF generado y correo enviado correctamente");
+      } else {
+        alert("PDF generado pero hubo un error al enviar el correo");
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      alert("PDF generado pero hubo un error al enviar el correo");
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   return (
@@ -578,10 +623,15 @@ export default function Cotizador() {
                   </p>
                   <button
                     type="button"
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded mb-8"
+                    className={`font-bold py-3 px-8 rounded mb-8 ${
+                      isGenerating
+                        ? "bg-gray-500 cursor-not-allowed"
+                        : "bg-blue-600 hover:bg-blue-700"
+                    } text-white`}
                     onClick={handleGeneratePDF}
+                    disabled={isGenerating}
                   >
-                    GENERAR PDF
+                    {isGenerating ? "GENERANDO..." : "GENERAR PDF"}
                   </button>
                 </div>
               </div>
