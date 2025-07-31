@@ -43,29 +43,30 @@ export default function AvisoPrivacidad() {
                     BETA LEASING, SOCIEDAD ANÓNIMA PROMOTORA DE INVERSIÓN DE
                     CAPITAL VARIABLE
                   </strong>{" "}
-                  (En lo sucesivo referido indistintamente como "BETALEASING"),
-                  se preocupa por la confidencialidad y seguridad de la
-                  información que recaba en su actividad comercial, así como,
-                  los datos personales provenientes de sus proveedores,
-                  colaboradores, clientes, arrendatarios y usuarios de sus
-                  servicios en general, por lo que tiene el compromiso y otorga
-                  la máxima importancia a la confidencialidad, privacidad y
-                  debida protección de la información personal que le es
+                  (En lo sucesivo referido indistintamente como
+                  &quot;BETALEASING&quot;), se preocupa por la confidencialidad
+                  y seguridad de la información que recaba en su actividad
+                  comercial, así como, los datos personales provenientes de sus
+                  proveedores, colaboradores, clientes, arrendatarios y usuarios
+                  de sus servicios en general, por lo que tiene el compromiso y
+                  otorga la máxima importancia a la confidencialidad, privacidad
+                  y debida protección de la información personal que le es
                   confiada por Usted. Por su código de ética, BETALEASING está
                   comprometido a manejar sus datos personales de manera
                   responsable y con apego a lo previsto por la Ley Federal de
                   Protección de Datos Personales en Posesión de Particulares (En
-                  lo sucesivo referida como "LFPDPPP"), su Reglamento (En lo
-                  sucesivo "RLFPDPPP") y demás normatividad aplicable. Por ello,
-                  protegemos su información mediante medidas de seguridad tanto
-                  físicas como electrónicas en su almacenamiento y con la
-                  continua revisión de nuestros procesos de protección de la
-                  información. Por este motivo compartimos con usted nuestra
-                  política de privacidad y del cómo salvaguardamos la
-                  integridad, privacidad y protección de sus datos personales,
-                  en apego a la LFPDPPP y su Reglamento. Usted como titular de
-                  datos personales, tiene a su disposición, en todo momento éste
-                  aviso de privacidad en nuestra página de internet:{" "}
+                  lo sucesivo referida como &quot;LFPDPPP&quot;), su Reglamento
+                  (En lo sucesivo &quot;RLFPDPPP&quot;) y demás normatividad
+                  aplicable. Por ello, protegemos su información mediante
+                  medidas de seguridad tanto físicas como electrónicas en su
+                  almacenamiento y con la continua revisión de nuestros procesos
+                  de protección de la información. Por este motivo compartimos
+                  con usted nuestra política de privacidad y del cómo
+                  salvaguardamos la integridad, privacidad y protección de sus
+                  datos personales, en apego a la LFPDPPP y su Reglamento. Usted
+                  como titular de datos personales, tiene a su disposición, en
+                  todo momento éste aviso de privacidad en nuestra página de
+                  internet:{" "}
                   <a
                     href="https://www.betaleasing.com"
                     target="_blank"
@@ -135,12 +136,12 @@ export default function AvisoPrivacidad() {
                 <p className="text-gray-700 leading-relaxed">
                   Usted podrá en cualquier momento revocar este consentimiento,
                   al igual que usted podrá ejercer cualquiera de los derechos
-                  "ARCO" (acceso, rectificación, cancelación u oposición)
-                  comunicándose con nosotros, siempre y cuando se den los
-                  supuestos de la LFPDPPP. Usted podrá acceder en todo momento
-                  al presente aviso de privacidad a través de nuestro sitio web;
-                  así como, cualquier cambio sustancial o total que se realice
-                  le será comunicado por ese medio:
+                  &quot;ARCO&quot; (acceso, rectificación, cancelación u
+                  oposición) comunicándose con nosotros, siempre y cuando se den
+                  los supuestos de la LFPDPPP. Usted podrá acceder en todo
+                  momento al presente aviso de privacidad a través de nuestro
+                  sitio web; así como, cualquier cambio sustancial o total que
+                  se realice le será comunicado por ese medio:
                   www.betaleasing.com/privacidad.
                 </p>
               </section>
