@@ -127,7 +127,7 @@ const generatePDF = (data) => {
   y += 6;
   doc.text(`Año: ${data.ano || "-"}`, 14, y);
   y += 6;
-  doc.text(`Valor Factura: ${data.valorFactura || "-"}`, 14, y);
+  doc.text(`Valor Factura sin IVAN: ${data.valorFactura || "-"}`, 14, y);
   y += 12;
 
   // Información del arrendamiento
