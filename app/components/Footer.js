@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <>
@@ -18,12 +20,12 @@ export default function Footer() {
         </div>
         <div className="text-xs flex flex-col gap-1 text-center mt-2">
           <div className="font-bold mb-1">Legal</div>
-          <a href="#" className="hover:underline">
+          <a href="/aviso-privacidad" className="hover:underline">
             Términos y condiciones
           </a>
-          <a href="#" className="hover:underline">
+          <Link href="/aviso-privacidad" className="hover:underline">
             Aviso de privacidad
-          </a>
+          </Link>
         </div>
       </footer>
 
@@ -53,12 +55,12 @@ export default function Footer() {
         {/* Legal */}
         <div className="text-xs flex flex-col gap-1 text-left min-w-[180px]">
           <div className="font-bold mb-1 text-left">Legal</div>
-          <a href="#" className="hover:underline">
+          <a href="/aviso-privacidad" className="hover:underline">
             Términos y condiciones
           </a>
-          <a href="#" className="hover:underline">
+          <Link href="/aviso-privacidad" className="hover:underline">
             Aviso de privacidad
-          </a>
+          </Link>
         </div>
       </footer>
     </>
