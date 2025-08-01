@@ -202,7 +202,7 @@ export default function Cotizador() {
     y += 6;
     doc.text(`Año: ${ano || "-"}`, 14, y);
     y += 6;
-    doc.text(`Valor Factura sin IVA: ${valorFactura}`, 14, y);
+    doc.text(`Valor Factura: ${valorTotal}`, 14, y);
     y += 12;
     // Información del arrendamiento
     doc.setFont("helvetica", "bold");
